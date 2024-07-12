@@ -33,6 +33,7 @@ public class UserController {
     }
 
     public void logout() {
+        logoutSuccess();
     }
 
     public String signup() {
@@ -48,6 +49,7 @@ public class UserController {
     }
 
     private void logoutSuccess() {
+        view.logoutSuccessView();
     }
 
     private void signupSuccess() {
