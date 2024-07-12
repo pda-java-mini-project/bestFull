@@ -8,7 +8,16 @@ public class UserController {
     private static final UserView view = new UserView();
 
     public int login(String loginId, String wp) {
-        return 0;
+        User user = userService.login(loginId, wp);
+
+        if(user == null) {
+            loginFail();
+            return -1;
+        }
+
+        loginSuccess(user);
+
+        return user.getId();
     }
 
     public void logout() {
@@ -19,9 +28,11 @@ public class UserController {
     }
 
     private void loginFail() {
+        view.loginFailView();
     }
 
-    private void loginSuccess() {
+    private void loginSuccess(User user) {
+        view.loginSuccessView(user);
     }
 
     private void logoutSuccess() {
