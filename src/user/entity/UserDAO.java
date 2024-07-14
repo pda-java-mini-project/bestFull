@@ -27,4 +27,14 @@ public class UserDAO {
     public int generateId() {
         return ++currentId; // 유니크한 ID 생성
     }
+
+    public boolean deleteUser(String loginId, String wp) {
+        User userToDelete = select(loginId, wp);
+        if (userToDelete != null) {
+            userDb.remove(userToDelete.getId());
+            return true;
+        }
+        return false;
+    }
+
 }
