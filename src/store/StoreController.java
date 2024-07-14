@@ -3,27 +3,33 @@ package store;
 import store.model.DishInfo;
 import store.model.Store;
 import store.model.StoreModel;
+import store.model.StoreOrderDTO;
+
 import java.util.HashMap;
 
 public class StoreController {
-    public DishInfo[] startStore() {
-        StoreModel storeModel = new StoreModel();
-        StoreView storeView = new StoreView();
+
+    StoreModel storeModel = new StoreModel();
+    StoreView storeView = new StoreView();
+
+    public StoreOrderDTO startStore() {
         int categoryNumber = 0;
         String category = "error";
         HashMap<String, Store> filteredStores = new HashMap<>();
         int storeNumber = 0;
         DishInfo[] dishInfoToArr = null;
+        Store selectedStore = null;
 
         while(category.equals("error") || storeNumber == 0) {
             categoryNumber = storeView.printCategory();
+            if(categoryNumber == 0) return null;
             category = storeModel.categoryToStirng(categoryNumber);
             if(category.equals("error")) {
                 storeView.printErrorMessage();
                 continue;
             }
 
-            Store selectedStore = null;
+
             while(selectedStore == null) {
                 filteredStores = storeModel.filterStores(category);
                 storeNumber = storeView.printSelectedStores(category, filteredStores);
@@ -47,6 +53,7 @@ public class StoreController {
 
             }
         }
-        return dishInfoToArr;
+
+        return new StoreOrderDTO(dishInfoToArr, selectedStore.getStoreName());
     }
 }

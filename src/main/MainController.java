@@ -6,12 +6,12 @@ public class MainController {
 
     MainView view = new MainView();
 
-    public int mainPage(){
+    public int startPage(){
         int command;
 
         while(true){
             try{
-                command = view.mainView();
+                command = view.startView();
             } catch (NumberFormatException e){
                 view.errorView("입력 값이 숫자가 아님");
                 continue;
@@ -21,7 +21,6 @@ public class MainController {
                 view.errorView("0~2 사이 숫자가 아님");
                 continue;
             }
-
             break;
         }
 
@@ -30,5 +29,9 @@ public class MainController {
 
     public void exitPage(){
         view.exitView();
+    }
+
+    public int mainPage() {
+        return view.mainView();
     }
 }

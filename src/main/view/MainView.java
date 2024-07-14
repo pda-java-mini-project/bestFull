@@ -8,7 +8,7 @@ public class MainView {
 
 
 
-    public int mainView(){
+    public int startView(){
         System.out.println("*************************** 시작 페이지 ****************************\n" +
                            "                   BESTful 배민에 오신 것을 환영합니다                 \n" +
                            "                     0. 종료  1. 로그인  2. 회원가입                  \n" +
@@ -27,4 +27,12 @@ public class MainView {
     }
 
 
+    public int mainView(){
+        System.out.println("*************************** 시작 페이지 ****************************\n" +
+                           "                   BESTful 배민에 오신 것을 환영합니다                 \n" +
+                           "                0. 로그아웃 1. 주문하기  2. 주문내역 확인하기            \n" +
+                           "******************************************************************\n" +
+                           "입력: ");
+        return Integer.parseInt(scanner.nextLine());
+    }
 }
