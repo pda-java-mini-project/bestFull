@@ -49,6 +49,7 @@ public class UserView {
     }
 
     public String[] getInput() {
+        System.out.print("입력: ");
         return scanner.nextLine().split(" ");
     }
 }
