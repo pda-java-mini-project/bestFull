@@ -13,7 +13,7 @@ public class UserController {
 
     public int login(String[] inputs) {
         // 입력 개수 예외처리
-        if(inputs.length != 2) {
+        if (inputs.length != 2) {
             return -1;
         }
 
@@ -22,7 +22,7 @@ public class UserController {
 
         User user = userService.login(loginId, wp);
 
-        if(user == null) {
+        if (user == null) {
             loginFail();
             return -1;
         }
@@ -36,8 +36,26 @@ public class UserController {
         logoutSuccess();
     }
 
-    public String signup() {
-        return "";
+    public int signup(String[] inputs) {
+        // 입력 개수 예외처리
+        if (inputs.length != 3) {
+            signupFail();
+            return -1;
+        }
+
+        String userName = inputs[0];
+        String loginId = inputs[1];
+        String wp = inputs[2];
+
+        boolean success = userService.signup(userName, loginId, wp);
+
+        if (success) {
+            signupSuccess();
+            return 1; // 회원가입 성공
+        } else {
+            signupFail();
+            return -1; // 회원가입 실패
+        }
     }
 
     private void loginFail() {
@@ -53,8 +71,10 @@ public class UserController {
     }
 
     private void signupSuccess() {
+        view.signupSuccessView();
     }
 
     private void signupFail() {
+        view.signupFailView();
     }
 }
