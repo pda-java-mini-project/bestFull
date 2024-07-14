@@ -1,7 +1,7 @@
 import exception.ExceptionHandler;
 import exception.InvalidInputException;
 import order.OrderController;
-import store.model.Menu;
+import store.model.MenuGM;
 
 public class OrderManager {
     OrderController orderController = new OrderController();
@@ -48,7 +48,7 @@ public class OrderManager {
     private void setupOrderService() {
         orderController.setUserId(1);
         orderController.setStoreName("조조 칼국수");
-        orderController.setCurrentMenus(new Menu[]{new Menu(1, "칼국수", 10000, "기가 맥힘"), new Menu(2, "파전", 5000, "막걸리 생각")});
+        orderController.setCurrentMenus(new MenuGM[]{new MenuGM(1, "칼국수", 10000, "기가 맥힘"), new MenuGM(2, "파전", 5000, "막걸리 생각")});
     }
 
     private void addOrderMenu() {

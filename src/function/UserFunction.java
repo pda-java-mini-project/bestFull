@@ -14,7 +14,9 @@ public class UserFunction {
 
     public int login(){
 
+        String[] idAndPw = userController.loginPage();
+        int userId = userController.login(idAndPw);
 
-
-        return 0;}
+        return userId;
+    }
 }

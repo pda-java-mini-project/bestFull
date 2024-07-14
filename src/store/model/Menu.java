@@ -1,33 +1,35 @@
 package store.model;
 
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Menu {
-    private int id;
-    private String name;
-    private int price;
+    private String storeName;
+    private HashMap<Integer, DishInfo> dishes;
 
-    private String content;
-
-    public Menu(int id, String name, int price, String content) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.content = content;
+    public Menu(String storeName) {
+        this.storeName = storeName;
+        dishes = new HashMap<>();
     }
 
-    public int getId() {
-        return id;
+    public void addDish(int dishId, String dishName, Integer dishPrice, String dishDescription) {
+        dishes.put(dishId, new DishInfo(dishId, dishName, dishPrice, dishDescription));
     }
 
-    public String getName() {
-        return name;
+    public int getAveragePrice() {
+        int sum = 0;
+
+        Iterator<Integer> keys = dishes.keySet().iterator();
+        while(keys.hasNext()) {
+            Integer key = keys.next();
+            sum += dishes.get(key).getDishPrice();
+        }
+        int averagePrice = sum / dishes.size();
+
+        return averagePrice;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public String getContent() {
-        return content;
+    public HashMap<Integer, DishInfo> getDishes() {
+        return dishes;
     }
 }

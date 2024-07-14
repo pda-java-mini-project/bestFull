@@ -4,26 +4,26 @@ import exception.ExceptionHandler;
 import exception.InvalidInputException;
 import exception.MenuNotFoundException;
 import order.model.CartService;
-import order.model.OrderMenu;
 import order.model.OrderService;
-import store.model.Menu;
+import store.model.MenuGM;
 
 public final class OrderController {
     private final OrderView orderView = new OrderView();
     private final CartService cartService = new CartService();
     private final OrderService orderService = new OrderService();
-    private Menu[] currentMenus = null;
+    private MenuGM[] currentMenuGMS = null;
     private String storeName = "";
 
     private int userId = 0;
 
-    public void setCurrentMenus(Menu[] menus) {
-        currentMenus = menus;
+    public void setCurrentMenus(MenuGM[] menuGMS) {
+        currentMenuGMS = menuGMS;
     }
     public void setStoreName(String storeName) { this.storeName = storeName; }
 
     public void setUserId(int userId) { this.userId = userId; }
     public void showReceiveAddItemToCartView() {
+        cartService.reset();
         orderView.showOrderNoticePage();
     }
 
@@ -119,8 +119,8 @@ public final class OrderController {
         int menuId = Integer.parseInt(addMenus[0]);
         boolean isCorrectMenuId = false;
 
-        for (Menu menu : currentMenus) {
-            if (menu.getId() == menuId) {
+        for (MenuGM menuGM : currentMenuGMS) {
+            if (menuGM.getId() == menuId) {
                 isCorrectMenuId = true;
                 break;
             }
@@ -150,9 +150,9 @@ public final class OrderController {
     }
 
     private String findMenuNameById(int menuId) {
-        for (Menu menu : currentMenus) {
-            if (menu.getId() == menuId) {
-                return menu.getName();
+        for (MenuGM menuGM : currentMenuGMS) {
+            if (menuGM.getId() == menuId) {
+                return menuGM.getName();
             }
         }
 
@@ -160,9 +160,9 @@ public final class OrderController {
     }
 
     private int findMenuPriceById(int menuId) {
-        for (Menu menu : currentMenus) {
-            if (menu.getId() == menuId) {
-                return menu.getPrice();
+        for (MenuGM menuGM : currentMenuGMS) {
+            if (menuGM.getId() == menuId) {
+                return menuGM.getPrice();
             }
         }
 

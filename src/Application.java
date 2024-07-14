@@ -1,37 +1,31 @@
+import function.MainFunction;
 import function.OrderFunction;
 import function.UserFunction;
 import main.MainController;
 
 public class Application {
 
-    MainController mainController = new MainController();
     UserFunction userFunction = new UserFunction();
     OrderFunction orderFunction = new OrderFunction();
+
+    MainFunction mainFunction = new MainFunction();
 
     public void start(){
         int loginUserId = -1;
 
         while(true){
-            int command = mainController.mainPage();
-            if(command == 0) mainController.exitPage();
+//            loginUserId = mainFunction.start();
+//            if(loginUserId == -1) break;
+//            if(loginUserId > 0){
+//                while(true){
+//
+//                int command = mainFunction.main();
+//                if(command == 0) break;
+//
+//
+//                }
 
-            if(command == 1) loginUserId = userFunction.login();
-            if(command == 2) userFunction.join();
-
-            if(loginUserId != -1){
-
-                while(true){
-
-
-
-
-
-
-
-
-
-                }
-            }
+            orderFunction.makeOrder(12);
 
 
         }

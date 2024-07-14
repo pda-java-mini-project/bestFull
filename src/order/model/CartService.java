@@ -1,7 +1,5 @@
 package order.model;
 
-import store.model.Menu;
-
 public class CartService {
     Cart cart = new Cart();
 
@@ -27,5 +25,9 @@ public class CartService {
 
     public OrderMenu[] getOrderMenus() {
         return cart.getOrderMenus();
+    }
+
+    public void reset(){
+        this.cart = new Cart();
     }
 }
