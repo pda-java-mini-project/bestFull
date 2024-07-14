@@ -1,6 +1,7 @@
 package store;
 
 import store.model.Menu;
+import store.model.MenuGM;
 import store.model.Store;
 import store.model.DishInfo;
 import java.util.HashMap;

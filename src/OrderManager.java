@@ -1,42 +1,30 @@
-package function;
-
 import exception.ExceptionHandler;
 import exception.InvalidInputException;
 import order.OrderController;
-import store.StoreController;
-import store.model.DishInfo;
-import store.model.StoreOrderDTO;
+import store.model.MenuGM;
 
-public class OrderFunction {
-
-    StoreController storeController = new StoreController();
+public class OrderManager {
     OrderController orderController = new OrderController();
+    public void startService() {
+        orderService();
+    }
 
-
-    public void makeOrder(int userId){
-
-        StoreOrderDTO dto = storeController.startStore();
-        if (dto == null) return;
-
-        orderController.setUserId(userId);
-        orderController.setCurrentMenus(dto.getMenus());
-        orderController.setStoreName(dto.getStoreName());
-
-        orderController.showReceiveAddItemToCartView();
-        orderController.receiveAddOrderMenu();
-
+    private void orderService() {
+        boolean isStopOrderService = false;
+        setupOrderService();
+        addOrderMenu();
 
         boolean isStartCartSevice = true;
         while (isStartCartSevice) {
             orderController.showCartView();
             orderController.showReceiveCartPageOptionNoticeView();
-
             switch (orderController.receiveCartPageOption()) {
                 case "0":
-                    return;
+                    isStopOrderService = true;
+                    isStartCartSevice = false;
+                    break;
                 case "1":
-                    orderController.showReceiveEditItemToCartView();
-                    orderController.receiveAddOrderMenu();
+                    editOrderMenu();
                     break;
                 case "2":
                     boolean isPaymentServiceCompleted = paymentService();
@@ -50,14 +38,28 @@ public class OrderFunction {
             }
         }
 
-        orderController.showReceiptView();
-        orderController.receiveOrderCompletedOption();
+        if (isStopOrderService) {
+            return;
+        }
+
+        receiptService();
     }
 
-    public void orderList(String userId){
-
+    private void setupOrderService() {
+        orderController.setUserId(1);
+        orderController.setStoreName("조조 칼국수");
+        orderController.setCurrentMenus(new MenuGM[]{new MenuGM(1, "칼국수", 10000, "기가 맥힘"), new MenuGM(2, "파전", 5000, "막걸리 생각")});
     }
 
+    private void addOrderMenu() {
+        orderController.showReceiveAddItemToCartView();
+        orderController.receiveAddOrderMenu();
+    }
+
+    private void editOrderMenu() {
+        orderController.showReceiveEditItemToCartView();
+        orderController.receiveAddOrderMenu();
+    }
 
     private boolean paymentService() {
         orderController.showPaymentView();
@@ -78,4 +80,8 @@ public class OrderFunction {
         return isStartPaymentSevice;
     }
 
+    private void receiptService() {
+        orderController.showReceiptView();
+        orderController.receiveOrderCompletedOption();
+    }
 }
