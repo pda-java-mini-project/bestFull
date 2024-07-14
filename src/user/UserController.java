@@ -36,6 +36,11 @@ public class UserController {
         logoutSuccess();
     }
 
+
+    public String[] signUpPage(){
+        return view.signupView();
+    }
+
     public int signup(String[] inputs) {
         // 입력 개수 예외처리
         if (inputs.length != 3) {

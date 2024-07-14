@@ -10,26 +10,27 @@ public class Application {
 
     MainFunction mainFunction = new MainFunction();
 
-    public void start(){
+    public void start() {
         int loginUserId = -1;
 
-        while(true){
-//            loginUserId = mainFunction.start();
-//            if(loginUserId == -1) break;
-//            if(loginUserId > 0){
-//                while(true){
-//
-//                int command = mainFunction.main();
-//                if(command == 0) break;
-//
-//
-//                }
+        while (true) {
+            loginUserId = mainFunction.start();
+            if (loginUserId == 0) break;
+            if (loginUserId > 0) {
+                while (true) {
+                    int command = mainFunction.main();
+                    if (command == 0) {
+                        userFunction.logout();
+                        break;
+                    }
 
-            orderFunction.makeOrder(12);
+                    if(command == 1){
+                        orderFunction.makeOrder(loginUserId);
+                    }
 
+                }
+            }
 
         }
-
     }
-
 }

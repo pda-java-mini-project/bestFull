@@ -16,6 +16,7 @@ public class OrderFunction {
     public void makeOrder(int userId){
 
         StoreOrderDTO dto = storeController.startStore();
+        if (dto == null) return;
 
         orderController.setUserId(userId);
         orderController.setCurrentMenus(dto.getMenus());

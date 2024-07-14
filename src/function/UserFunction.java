@@ -6,17 +6,18 @@ public class UserFunction {
 
     UserController userController = new UserController();
 
-    public void join(){
-
-
-
+    public void signUp(){
+        String[] idAndPwAndName = userController.signUpPage();
+        userController.signup(idAndPwAndName);
     }
 
     public int login(){
-
         String[] idAndPw = userController.loginPage();
         int userId = userController.login(idAndPw);
-
         return userId;
+    }
+
+    public void logout(){
+        userController.logout();
     }
 }

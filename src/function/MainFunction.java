@@ -13,12 +13,12 @@ public class MainFunction {
 
         if(command == 0) {
             mainController.exitPage();
-            return -1;
+            return 0;
         }
         if(command == 1) return userFunction.login();
-        if(command == 2) userFunction.join();
+        if(command == 2) userFunction.signUp();
 
-        return 0;
+        return -1;
     }
 
     public int main(){

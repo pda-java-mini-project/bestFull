@@ -22,6 +22,7 @@ public class StoreController {
 
         while(category.equals("error") || storeNumber == 0) {
             categoryNumber = storeView.printCategory();
+            if(categoryNumber == 0) return null;
             category = storeModel.categoryToStirng(categoryNumber);
             if(category.equals("error")) {
                 storeView.printErrorMessage();
