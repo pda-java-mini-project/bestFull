@@ -4,10 +4,10 @@ import user.entity.User;
 import java.util.Scanner;
 
 public class UserView {
-    Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final StringBuilder view = new StringBuilder();
 
     public String[] loginView() {
-        StringBuilder view = new StringBuilder();
         view.append("*************************** 로그인 페이지 ****************************\n")
                 .append("            아이디와 비밀번호를 스페이스 간격을 두고 입력해주세요\n")
                 .append("********************************************************************\n");
@@ -30,7 +30,6 @@ public class UserView {
     }
 
     public String[] signupView() {
-        StringBuilder view = new StringBuilder();
         view.append("*************************** 회원가입 페이지 ****************************\n")
                 .append("        가입할 이름, 아이디, 비밀번호를 스페이스 간격을 두고 입력해주세요 \n")
                 .append("********************************************************************\n");
