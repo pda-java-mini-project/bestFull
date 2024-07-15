@@ -85,10 +85,6 @@ public class UserController {
             deleteFail();
             return -1;
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c6f51ec5e93a87c8e5795363b231e958a58dc2a
     }
 
     private void loginFail() {
