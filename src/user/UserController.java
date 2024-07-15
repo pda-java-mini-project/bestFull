@@ -67,6 +67,11 @@ public class UserController {
         return inputs.length == requiredInputCount;
     }
 
+    public String[] deleteUserPage(){
+        return view.deleteUserView();
+    }
+
+
     public int deleteUser(String[] inputs) {
         if (inputs.length != 2) {
             deleteFail();
