@@ -7,7 +7,7 @@ public class UserDAO {
     private int autoIncrementIndex = 1;
 
     public void insert(User user) {
-        user.setId(autoIncrementIndex); // ID 설정
+        user.setId(autoIncrementIndex);
         userDb.put(autoIncrementIndex++, user);
     }
 
