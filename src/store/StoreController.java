@@ -13,7 +13,6 @@ public class StoreController {
     StoreView storeView = new StoreView();
 
     public StoreOrderDTO startStore() {
-        int categoryNumber = 0;
         String category = "error";
         HashMap<String, Store> filteredStores = new HashMap<>();
         int storeNumber = 0;
@@ -21,39 +20,74 @@ public class StoreController {
         Store selectedStore = null;
 
         while(category.equals("error") || storeNumber == 0) {
-            categoryNumber = storeView.printCategory();
-            if(categoryNumber == 0) return null;
-            category = storeModel.categoryToStirng(categoryNumber);
+            category = receiveCategory();
+            if(category == null) return null;
             if(category.equals("error")) {
-                storeView.printErrorMessage();
                 continue;
             }
 
-
             while(selectedStore == null) {
-                filteredStores = storeModel.filterStores(category);
-                storeNumber = storeView.printSelectedStores(category, filteredStores);
+                filteredStores = getFilterStores(category);
+                storeNumber = receiveStoreNumber(category, filteredStores);
                 if(storeNumber == 0) {
                     break;
                 }
-                selectedStore = storeModel.selectStore(storeNumber, filteredStores);
+
+                selectedStore = showSelectedStore(storeNumber, filteredStores);
                 if(selectedStore == null) {
-                    storeView.printErrorMessage();
                     continue;
                 }
-                int orderCommand = storeView.printStoreInfo(selectedStore);
+
+                int orderCommand = receiveOrderCommand(selectedStore);
                 if(orderCommand != 1) {
                     selectedStore = null;
-                    if(orderCommand != 0) {
-                        storeView.printErrorMessage();
-                    }
                     continue;
                 }
-                dishInfoToArr = storeModel.convertDishInfoToArr(selectedStore);
 
+                dishInfoToArr = storeModel.convertDishInfoToArr(selectedStore);
             }
         }
 
         return new StoreOrderDTO(dishInfoToArr, selectedStore.getStoreName());
+    }
+
+    private String receiveCategory() {
+        int receivedCategoryNumber = storeView.printCategory();
+        if(receivedCategoryNumber == 0) return null;
+        String receivedCategory = storeModel.categoryToStirng(receivedCategoryNumber);
+        if(receivedCategory.equals("error")) {
+            storeView.printErrorMessage();
+            return "error";
+        }
+        return receivedCategory;
+    }
+
+    private HashMap<String, Store> getFilterStores(String category) {
+        HashMap<String, Store> filteredStores = storeModel.filterStores(category);
+        return filteredStores;
+    }
+
+    private int receiveStoreNumber(String category, HashMap<String, Store> filteredStores) {
+        int receivedStoreNumber = storeView.printSelectedStores(category, filteredStores);
+        return receivedStoreNumber;
+    }
+
+    private Store showSelectedStore(int storeNumber, HashMap<String, Store> filteredStores) {
+        Store selectStore = storeModel.selectStore(storeNumber, filteredStores);
+        if(selectStore == null) {
+            storeView.printErrorMessage();
+            return null;
+        }
+        return selectStore;
+    }
+
+    private int receiveOrderCommand(Store selectedStore) {
+        int receivedOrderNumber = storeView.printStoreInfo(selectedStore);
+        if(receivedOrderNumber != 1) {
+            if(receivedOrderNumber != 0) {
+                storeView.printErrorMessage();
+            }
+        }
+        return receivedOrderNumber;
     }
 }
