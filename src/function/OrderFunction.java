@@ -54,7 +54,22 @@ public class OrderFunction {
         orderController.receiveOrderCompletedOption();
     }
 
+    public void checkOrder() {
+        orderController.showOrderedView();
+        String orderDetailPageOption = orderController.receiveOrderDetailOption();
+        switch (orderDetailPageOption) {
+            case "0":
+                return;
+            default:
+                orderController.showOrderDetailView(orderDetailPageOption);
+        }
 
+        switch (orderController.receiveOrderCompletedOption()) {
+            case "0":
+                return;
+            default:
+                ExceptionHandler.handleInvalidInputException(new InvalidInputException("InvalidInputException"));
+        }
     }
 
     private boolean paymentService() {
