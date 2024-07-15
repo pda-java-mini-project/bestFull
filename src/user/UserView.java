@@ -4,10 +4,10 @@ import user.entity.User;
 import java.util.Scanner;
 
 public class UserView {
-    Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final StringBuilder view = new StringBuilder();
 
     public String[] loginView() {
-        StringBuilder view = new StringBuilder();
         view.append("*************************** 로그인 페이지 ****************************\n")
                 .append("            아이디와 비밀번호를 스페이스 간격을 두고 입력해주세요\n")
                 .append("********************************************************************\n");
@@ -25,12 +25,16 @@ public class UserView {
         System.out.println("아이디와 비밀번호를 정확히 입력해 주세요.");
     }
 
+    public void loginInputFailView() {
+        System.out.println("로그인에 실패하였습니다.");
+        System.out.println("아이디와 비밀번호를 스페이스 간격을 두고 입력해주세요.");
+    }
+
     public void logoutSuccessView() {
         System.out.println("로그아웃 되었습니다.");
     }
 
     public String[] signupView() {
-        StringBuilder view = new StringBuilder();
         view.append("*************************** 회원가입 페이지 ****************************\n")
                 .append("        가입할 이름, 아이디, 비밀번호를 스페이스 간격을 두고 입력해주세요 \n")
                 .append("********************************************************************\n");
@@ -68,6 +72,7 @@ public class UserView {
     }
 
     public String[] getInput() {
+        System.out.print("입력: ");
         return scanner.nextLine().split(" ");
     }
 }

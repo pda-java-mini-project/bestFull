@@ -20,4 +20,9 @@ public class UserFunction {
     public void logout(){
         userController.logout();
     }
+
+    public void deleteUser(){
+        String[] idAndPw = userController.deleteUserPage();
+        userController.deleteUser(idAndPw);
+    }
 }

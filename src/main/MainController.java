@@ -17,7 +17,7 @@ public class MainController {
                 continue;
             }
 
-            if(command > 2 || command < 0){
+            if(command > 3 || command < 0){
                 view.errorView("0~2 사이 숫자가 아님");
                 continue;
             }
@@ -32,6 +32,23 @@ public class MainController {
     }
 
     public int mainPage() {
-        return view.mainView();
+        int command;
+
+        while(true){
+            try{
+                command = view.mainView();
+            } catch (NumberFormatException e){
+                view.errorView("입력 값이 숫자가 아님");
+                continue;
+            }
+
+            if(command > 3 || command < 0){
+                view.errorView("0~2 사이 숫자가 아님");
+                continue;
+            }
+            break;
+        }
+
+        return command;
     }
 }

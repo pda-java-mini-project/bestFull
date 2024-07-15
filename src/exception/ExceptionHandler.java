@@ -8,4 +8,8 @@ public class ExceptionHandler {
     public static void handleMenuNotFoundException(MenuNotFoundException exception) {
         System.out.println("error: " + exception.getMessage());
     }
+
+    public static void handleOrderNotFoundException(OrderNotFoundException exception) {
+        System.out.println("error: " + exception.getMessage());
+    }
 }

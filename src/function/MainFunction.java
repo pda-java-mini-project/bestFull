@@ -17,6 +17,7 @@ public class MainFunction {
         }
         if(command == 1) return userFunction.login();
         if(command == 2) userFunction.signUp();
+        if(command == 3) userFunction.deleteUser();
 
         return -1;
     }
