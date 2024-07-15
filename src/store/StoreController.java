@@ -2,14 +2,14 @@ package store;
 
 import store.model.DishInfo;
 import store.model.Store;
-import store.model.StoreModel;
+import store.model.StoreService;
 import store.model.StoreOrderDTO;
 
 import java.util.HashMap;
 
 public class StoreController {
 
-    StoreModel storeModel = new StoreModel();
+    StoreService storeService = new StoreService();
     StoreView storeView = new StoreView();
 
     public StoreOrderDTO startStore() {
@@ -44,7 +44,7 @@ public class StoreController {
                     continue;
                 }
 
-                dishInfoToArr = storeModel.convertDishInfoToArr(selectedStore);
+                dishInfoToArr = storeService.convertDishInfoToArr(selectedStore);
             }
         }
 
@@ -54,7 +54,7 @@ public class StoreController {
     private String receiveCategory() {
         int receivedCategoryNumber = storeView.printCategory();
         if(receivedCategoryNumber == 0) return null;
-        String receivedCategory = storeModel.categoryToStirng(receivedCategoryNumber);
+        String receivedCategory = storeService.categoryToStirng(receivedCategoryNumber);
         if(receivedCategory.equals("error")) {
             storeView.printErrorMessage();
             return "error";
@@ -63,7 +63,7 @@ public class StoreController {
     }
 
     private HashMap<String, Store> getFilterStores(String category) {
-        HashMap<String, Store> filteredStores = storeModel.filterStores(category);
+        HashMap<String, Store> filteredStores = storeService.filterStores(category);
         return filteredStores;
     }
 
@@ -73,7 +73,7 @@ public class StoreController {
     }
 
     private Store showSelectedStore(int storeNumber, HashMap<String, Store> filteredStores) {
-        Store selectStore = storeModel.selectStore(storeNumber, filteredStores);
+        Store selectStore = storeService.selectStore(storeNumber, filteredStores);
         if(selectStore == null) {
             storeView.printErrorMessage();
             return null;

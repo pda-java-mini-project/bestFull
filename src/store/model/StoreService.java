@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
-public class StoreModel {
+public class StoreService {
     private HashMap<String, Store> stores;
     private StoreDB storeData;
 
-    public StoreModel() {
+    public StoreService() {
         storeData = new StoreDB();
         stores = new HashMap<>();
         stores = storeData.setStoreInformation();
