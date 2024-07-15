@@ -1,4 +1,4 @@
-package user.entity;
+package user.model;
 
 public class User {
     private int id;
@@ -15,6 +15,10 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLoginId() {
