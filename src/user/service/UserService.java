@@ -24,4 +24,9 @@ public class UserService {
         userDAO.insert(newUser);
         return true; // 회원가입 성공 시 true 반환
     }
+
+    public boolean deleteUser(String loginId, String wp) {
+        return userDAO.deleteUser(loginId, wp);
+    }
+
 }

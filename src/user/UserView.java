@@ -52,6 +52,25 @@ public class UserView {
         System.out.println("가입할 이름, 아이디, 비밀번호를 스페이스 간격을 두고 정확히 입력해 주세요.");
     }
 
+    public String[] deleteUserView() {
+        StringBuilder view = new StringBuilder();
+        view.append("*************************** 회원탈퇴 페이지 ****************************\n")
+                .append("  탈퇴할 아이디와 비밀번호를 입력해주세요 \n")
+                .append("********************************************************************\n");
+        System.out.print(view);
+
+        return getInput();
+    }
+
+    public void deleteSuccessView() {
+        System.out.println("회원탈퇴 되었습니다.");
+    }
+
+    public void deleteFailView() {
+        System.out.println("회원탈퇴에 실패하였습니다.");
+        System.out.println("입력한 아이디와 비밀번호를 확인해 주세요.");
+    }
+
     public String[] getInput() {
         System.out.print("입력: ");
         return scanner.nextLine().split(" ");

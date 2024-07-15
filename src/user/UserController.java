@@ -36,6 +36,7 @@ public class UserController {
         logoutSuccess();
     }
 
+
     public String[] signUpPage(){
         return view.signupView();
     }
@@ -66,6 +67,26 @@ public class UserController {
         return inputs.length == requiredInputCount;
     }
 
+    public int deleteUser(String[] inputs) {
+        if (inputs.length != 2) {
+            deleteFail();
+            return -1;
+        }
+
+        String loginId = inputs[0];
+        String wp = inputs[1];
+
+        boolean success = userService.deleteUser(loginId, wp);
+
+        if (success) {
+            deleteSuccess();
+            return 1;
+        } else {
+            deleteFail();
+            return -1;
+        }
+    }
+
     private void loginFail() {
         view.loginFailView();
     }
@@ -88,5 +109,13 @@ public class UserController {
 
     private void signupFail() {
         view.signupFailView();
+    }
+
+    private void deleteSuccess() {
+        view.deleteSuccessView();
+    }
+
+    private void deleteFail() {
+        view.deleteFailView();
     }
 }
