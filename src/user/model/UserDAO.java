@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class UserDAO {
     private HashMap<Integer, User> userDb = new HashMap<>();
-    private int autoIncrementIndex = 0;
+    private int autoIncrementIndex = 1;
 
     public void insert(User user) {
         user.setId(autoIncrementIndex); // ID 설정
