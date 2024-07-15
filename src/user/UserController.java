@@ -1,41 +1,40 @@
 package user;
 
+import exception.UserNotFoundException;
 import user.entity.User;
 import user.service.UserService;
 
 public class UserController {
     private static final UserService userService = new UserService();
     private static final UserView view = new UserView();
+    private final int FAIL = -1;
 
     public String[] loginPage() {
         return view.loginView();
     }
 
     public int login(String[] inputs) {
-        // 입력 개수 예외처리
-        if (inputs.length != 2) {
-            return -1;
+        if(!validateInputCount(inputs, 2)) {
+            loginInputFail();
+            return FAIL;
         }
 
-        String loginId = inputs[0];
-        String wp = inputs[1];
+        try {
+            String loginId = inputs[0];
+            String wp = inputs[1];
+            User user = userService.login(loginId, wp);
+            loginSuccess(user);
 
-        User user = userService.login(loginId, wp);
-
-        if (user == null) {
+            return user.getId();
+        } catch (UserNotFoundException e) {
             loginFail();
-            return -1;
+            return FAIL;
         }
-
-        loginSuccess(user);
-
-        return user.getId();
     }
 
     public void logout() {
         logoutSuccess();
     }
-
 
     public String[] signUpPage(){
         return view.signupView();
@@ -63,8 +62,16 @@ public class UserController {
         }
     }
 
+    public boolean validateInputCount(String[] inputs, int requiredInputCount) {
+        return inputs.length == requiredInputCount;
+    }
+
     private void loginFail() {
         view.loginFailView();
+    }
+
+    private void loginInputFail() {
+        view.loginInputFailView();
     }
 
     private void loginSuccess(User user) {

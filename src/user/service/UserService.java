@@ -1,13 +1,17 @@
 package user.service;
 
+import exception.UserNotFoundException;
 import user.entity.User;
 import user.entity.UserDAO;
 
 public class UserService {
     private static final UserDAO userDAO = new UserDAO();
 
-    public User login(String loginId, String wp) {
-        return userDAO.select(loginId, wp);
+    public User login(String loginId, String wp) throws UserNotFoundException {
+        User user = userDAO.select(loginId, wp);
+        if(user == null)
+            throw new UserNotFoundException();
+        return user;
     }
 
     public boolean signup(String userName, String loginId, String wp) {
