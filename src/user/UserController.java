@@ -4,7 +4,7 @@ import exception.DeleteFailedException;
 import exception.SignupFailedException;
 import exception.UserNotFoundException;
 import user.model.User;
-import user.service.UserService;
+import user.model.UserService;
 
 public class UserController {
     private static final UserService userService = new UserService();
