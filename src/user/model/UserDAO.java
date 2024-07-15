@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 public class UserDAO {
     private HashMap<Integer, User> userDb = new HashMap<>();
-    private int currentId = 0;
+    private int autoIncrementIndex = 0;
 
     public void insert(User user) {
-        userDb.put(user.getId(), user);
+        user.setId(autoIncrementIndex); // ID 설정
+        userDb.put(autoIncrementIndex++, user);
     }
 
     public User select(String loginId, String wp) {
@@ -20,10 +21,6 @@ public class UserDAO {
             }
         }
         return userResult;
-    }
-
-    public int generateId() {
-        return ++currentId;
     }
 
     public boolean updateUser(User user) {
