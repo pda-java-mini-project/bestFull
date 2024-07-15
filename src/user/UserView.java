@@ -25,6 +25,11 @@ public class UserView {
         System.out.println("아이디와 비밀번호를 정확히 입력해 주세요.");
     }
 
+    public void loginInputFailView() {
+        System.out.println("로그인에 실패하였습니다.");
+        System.out.println("아이디와 비밀번호를 스페이스 간격을 두고 입력해주세요.");
+    }
+
     public void logoutSuccessView() {
         System.out.println("로그아웃 되었습니다.");
     }
