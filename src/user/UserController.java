@@ -36,6 +36,7 @@ public class UserController {
         logoutSuccess();
     }
 
+
     public String[] signUpPage(){
         return view.signupView();
     }
@@ -64,6 +65,7 @@ public class UserController {
 
     public boolean validateInputCount(String[] inputs, int requiredInputCount) {
         return inputs.length == requiredInputCount;
+    }
 
     public int deleteUser(String[] inputs) {
         if (inputs.length != 2) {
@@ -83,7 +85,6 @@ public class UserController {
             deleteFail();
             return -1;
         }
-
     }
 
     private void loginFail() {
