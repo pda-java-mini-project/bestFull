@@ -1,5 +1,6 @@
 package order;
 
+import order.model.Order;
 import order.model.OrderMenu;
 
 import java.util.Scanner;
@@ -53,10 +54,17 @@ public class OrderView {
                             "*********************************************************************");
     }
 
+    public void showOrderDetailPage(OrderMenu[] orderMenus, int totalCartSum) {
+        System.out.println("*************************** 주문 상세 내역 ****************************");
+        showDinamicOrderMenus(orderMenus, totalCartSum);
+        System.out.println("                            0. 홈으로 돌아가기\n" +
+                            "*********************************************************************");
+    }
+
     private void showDinamicOrderMenus(OrderMenu[] orderMenus, int totalCartSum) {
-        System.out.println("[메뉴번호]\t\t\t\t메뉴명\t\t\t\t개수\t\t\t\t총액(가격 * 개수)\");");
+        System.out.println("[메뉴번호]\t\t메뉴명\t\t개수\t\t총액(가격 * 개수)");
         for(OrderMenu orderMenu : orderMenus) {
-            System.out.println(String.format("[%s]\t\t\t\t%s\t\t\t\t%s\t\t\t\t%,d(%,d * %d)",
+            System.out.println(String.format("[%s]\t\t%s\t\t%s\t\t%,d(%,d * %d)",
                     orderMenu.getId(),
                     orderMenu.getName(),
                     orderMenu.getCount(),
@@ -68,5 +76,21 @@ public class OrderView {
         System.out.println("                       ***********************");
         System.out.println(String.format("                              = %,d(원)", totalCartSum));
         System.out.println("*********************************************************************");
+    }
+
+    public void showOrderedPage(Order[] orders) {
+        System.out.println("*************************** 주문 내역 ****************************");
+        System.out.println("[주문번호]\t\t주문일[내림차순]\t\t가게명\t\t주문총액");
+        for (Order order : orders) {
+            System.out.println(String.format("[%s]\t\t%s\t\t%s\t\t%,d원",
+                    order.getId(),
+                    order.getDate(),
+                    order.getStoreName(),
+                    order.getPrice()));
+        }
+
+        System.out.println("                       0. 홈으로 돌아가기\n" +
+                "                N.주문내역 상세보기 [N: 주문 번호]\n" +
+                "*********************************************************************");
     }
 }

@@ -3,7 +3,10 @@ package order;
 import exception.ExceptionHandler;
 import exception.InvalidInputException;
 import exception.MenuNotFoundException;
+import exception.OrderNotFoundException;
 import order.model.CartService;
+import order.model.Order;
+import order.model.OrderMenu;
 import order.model.OrderService;
 import store.model.MenuGM;
 
@@ -111,6 +114,37 @@ public final class OrderController {
         return option;
     }
 
+    public void showOrderedView() {
+        orderView.showOrderedPage(orderService.getOrders());
+    }
+
+    public String receiveOrderDetailOption() {
+        boolean isNotCorrectInput = true;
+        String option = "";
+
+        while (isNotCorrectInput) {
+            option = orderView.receiveMessage();
+            try {
+                checkOrderedPageOptionValidity(option);
+                isNotCorrectInput = false;
+            } catch (InvalidInputException exception) {
+                ExceptionHandler.handleInvalidInputException(exception);
+            } catch (OrderNotFoundException exception) {
+                ExceptionHandler.handleOrderNotFoundException(exception);
+            }
+        }
+
+        return option;
+    }
+
+    public void showOrderDetailView(String id) {
+        Order order = orderService.getOrder(id);
+        OrderMenu[] orderMenus = order.getOrderMenus();
+        int totalPrice = orderService.getOrderMenusTotalPrice(orderMenus);
+
+        orderView.showOrderDetailPage(orderMenus, totalPrice);
+    }
+
     private void checkOrderValidity(String[] addMenus) throws InvalidInputException, MenuNotFoundException {
         if (addMenus.length != 2) {
             throw new InvalidInputException("InvalidInputException");
@@ -147,6 +181,29 @@ public final class OrderController {
             default:
                 throw new InvalidInputException("InvalidInputException");
         }
+    }
+
+    private void checkOrderedPageOptionValidity(String option) throws InvalidInputException, OrderNotFoundException {
+        int[] ids = orderService.getAllOrderId();
+        int optionAsInt;
+
+        try {
+            optionAsInt = Integer.parseInt(option);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("InvalidInputException");
+        }
+
+        if (optionAsInt == 0) {
+            return;
+        }
+
+        for (int id : ids) {
+            if (optionAsInt == id) {
+                return;
+            }
+        }
+
+        throw new OrderNotFoundException("OrderNotFoundException");
     }
 
     private String findMenuNameById(int menuId) {

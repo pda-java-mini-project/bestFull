@@ -28,6 +28,9 @@ public class Application {
                         orderFunction.makeOrder(loginUserId);
                     }
 
+                    if(command == 2){
+                        orderFunction.checkOrder();
+                    }
                 }
             }
 
