@@ -1,10 +1,10 @@
-package main;
+package home;
 
-import main.view.MainView;
+import home.view.HomeView;
 
-public class MainController {
+public class HomeController {
 
-    MainView view = new MainView();
+    HomeView view = new HomeView();
 
     public int startPage(){
         int command;

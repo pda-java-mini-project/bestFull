@@ -1,18 +1,18 @@
 package function;
 
-import main.MainController;
+import home.HomeController;
 
-public class MainFunction {
-    MainController mainController = new MainController();
+public class HomeFunction {
+    HomeController homeController = new HomeController();
     UserFunction userFunction = new UserFunction();
 
 
     public int start(){
 
-        int command = mainController.startPage();
+        int command = homeController.startPage();
 
         if(command == 0) {
-            mainController.exitPage();
+            homeController.exitPage();
             return 0;
         }
         if(command == 1) return userFunction.login();
@@ -23,7 +23,7 @@ public class MainFunction {
     }
 
     public int main(){
-        return mainController.mainPage();
+        return homeController.mainPage();
     }
 
 }

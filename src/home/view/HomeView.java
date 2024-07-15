@@ -1,8 +1,8 @@
-package main.view;
+package home.view;
 
 import java.util.Scanner;
 
-public class MainView {
+public class HomeView {
 
     Scanner scanner = new Scanner(System.in);
 
