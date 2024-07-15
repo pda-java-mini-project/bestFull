@@ -1,10 +1,8 @@
-package user.service;
+package user.model;
 
 import exception.DeleteFailedException;
 import exception.SignupFailedException;
 import exception.UserNotFoundException;
-import user.model.User;
-import user.model.UserDAO;
 
 public class UserService {
     private static final UserDAO userDAO = new UserDAO();
