@@ -13,6 +13,7 @@ public class UserView {
             .append("            아이디와 비밀번호를 스페이스 간격을 두고 입력해주세요\n")
             .append("********************************************************************\n");
         System.out.print(view);
+        view.setLength(0);
 
         return getInput();
     }
@@ -41,6 +42,7 @@ public class UserView {
             .append("        가입할 이름, 아이디, 비밀번호를 스페이스 간격을 두고 입력해주세요 \n")
             .append("********************************************************************\n");
         System.out.print(view);
+        view.setLength(0);
 
         return getInput();
     }
@@ -60,6 +62,7 @@ public class UserView {
             .append("  탈퇴할 아이디와 비밀번호를 입력해주세요 \n")
             .append("********************************************************************\n");
         System.out.print(view);
+        view.setLength(0);
 
         return getInput();
     }
