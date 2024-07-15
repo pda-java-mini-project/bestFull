@@ -1,8 +1,10 @@
 package user;
 
+import exception.DeleteFailedException;
+import exception.SignupFailedException;
 import exception.UserNotFoundException;
-import user.entity.User;
-import user.service.UserService;
+import user.model.User;
+import user.model.UserService;
 
 public class UserController {
     private static final UserService userService = new UserService();
@@ -14,7 +16,7 @@ public class UserController {
     }
 
     public int login(String[] inputs) {
-        if(!validateInputCount(inputs, 2)) {
+        if (!validateInputCount(inputs, 2)) {
             loginInputFail();
             return FAIL;
         }
@@ -24,7 +26,6 @@ public class UserController {
             String wp = inputs[1];
             User user = userService.login(loginId, wp);
             loginSuccess(user);
-
             return user.getId();
         } catch (UserNotFoundException e) {
             loginFail();
@@ -36,60 +37,53 @@ public class UserController {
         logoutSuccess();
     }
 
-
-    public String[] signUpPage(){
+    public String[] signUpPage() {
         return view.signupView();
     }
 
     public int signup(String[] inputs) {
-        // 입력 개수 예외처리
-        if (inputs.length != 3) {
+        if (!validateInputCount(inputs, 3)) {
             signupFail();
-            return -1;
+            return FAIL;
         }
 
-        String userName = inputs[0];
-        String loginId = inputs[1];
-        String wp = inputs[2];
-
-        boolean success = userService.signup(userName, loginId, wp);
-
-        if (success) {
+        try {
+            String userName = inputs[0];
+            String loginId = inputs[1];
+            String wp = inputs[2];
+            userService.signup(userName, loginId, wp);
             signupSuccess();
-            return 1; // 회원가입 성공
-        } else {
+            return 1;
+        } catch (SignupFailedException e) {
             signupFail();
-            return -1; // 회원가입 실패
+            return FAIL;
         }
-    }
-
-    public boolean validateInputCount(String[] inputs, int requiredInputCount) {
-        return inputs.length == requiredInputCount;
     }
 
     public String[] deleteUserPage(){
         return view.deleteUserView();
     }
 
-
     public int deleteUser(String[] inputs) {
-        if (inputs.length != 2) {
+        if (!validateInputCount(inputs, 2)) {
             deleteFail();
-            return -1;
+            return FAIL;
         }
 
-        String loginId = inputs[0];
-        String wp = inputs[1];
-
-        boolean success = userService.deleteUser(loginId, wp);
-
-        if (success) {
+        try {
+            String loginId = inputs[0];
+            String wp = inputs[1];
+            userService.deleteUser(loginId, wp);
             deleteSuccess();
             return 1;
-        } else {
+        } catch (DeleteFailedException e) {
             deleteFail();
-            return -1;
+            return FAIL;
         }
+    }
+
+    public boolean validateInputCount(String[] inputs, int requiredInputCount) {
+        return inputs.length == requiredInputCount;
     }
 
     private void loginFail() {

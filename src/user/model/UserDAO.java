@@ -1,31 +1,34 @@
-package user.entity;
+package user.model;
 
 import java.util.HashMap;
 
 public class UserDAO {
     private HashMap<Integer, User> userDb = new HashMap<>();
-    private int currentId = 0; // 유니크한 ID를 생성하기 위한 필드 추가
+    private int autoIncrementIndex = 0;
 
     public void insert(User user) {
-        userDb.put(user.getId(), user);
+        user.setId(autoIncrementIndex); // ID 설정
+        userDb.put(autoIncrementIndex++, user);
     }
 
     public User select(String loginId, String wp) {
         User userResult = null;
 
         for (User user : userDb.values()) {
-            if (user.getLoginId().equals(loginId)) {
-                if (user.getWp().equals(wp)) {
-                    userResult = user;
-                }
+            if (user.getLoginId().equals(loginId) && user.getWp().equals(wp)) {
+                userResult = user;
                 break;
             }
         }
         return userResult;
     }
 
-    public int generateId() {
-        return ++currentId; // 유니크한 ID 생성
+    public boolean updateUser(User user) {
+        if (userDb.containsKey(user.getId())) {
+            userDb.put(user.getId(), user);
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteUser(String loginId, String wp) {
@@ -36,5 +39,4 @@ public class UserDAO {
         }
         return false;
     }
-
 }

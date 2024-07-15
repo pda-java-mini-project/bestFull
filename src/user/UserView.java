@@ -1,6 +1,6 @@
 package user;
 
-import user.entity.User;
+import user.model.User;
 import java.util.Scanner;
 
 public class UserView {
@@ -8,10 +8,12 @@ public class UserView {
     private static final StringBuilder view = new StringBuilder();
 
     public String[] loginView() {
+        view.setLength(0);
         view.append("*************************** 로그인 페이지 ****************************\n")
-                .append("            아이디와 비밀번호를 스페이스 간격을 두고 입력해주세요\n")
-                .append("********************************************************************\n");
+            .append("            아이디와 비밀번호를 스페이스 간격을 두고 입력해주세요\n")
+            .append("********************************************************************\n");
         System.out.print(view);
+        view.setLength(0);
 
         return getInput();
     }
@@ -35,10 +37,12 @@ public class UserView {
     }
 
     public String[] signupView() {
+        view.setLength(0);
         view.append("*************************** 회원가입 페이지 ****************************\n")
-                .append("        가입할 이름, 아이디, 비밀번호를 스페이스 간격을 두고 입력해주세요 \n")
-                .append("********************************************************************\n");
+            .append("        가입할 이름, 아이디, 비밀번호를 스페이스 간격을 두고 입력해주세요 \n")
+            .append("********************************************************************\n");
         System.out.print(view);
+        view.setLength(0);
 
         return getInput();
     }
@@ -53,11 +57,12 @@ public class UserView {
     }
 
     public String[] deleteUserView() {
-        StringBuilder view = new StringBuilder();
+        view.setLength(0);
         view.append("*************************** 회원탈퇴 페이지 ****************************\n")
-                .append("  탈퇴할 아이디와 비밀번호를 입력해주세요 \n")
-                .append("********************************************************************\n");
+            .append("  탈퇴할 아이디와 비밀번호를 입력해주세요 \n")
+            .append("********************************************************************\n");
         System.out.print(view);
+        view.setLength(0);
 
         return getInput();
     }
