@@ -20,7 +20,7 @@ public class UserService {
             throw new SignupFailedException("Invalid input for signup.");
         }
 
-        User newUser = new User(0, loginId, userName, wp); // ID는 0으로 설정하여 초기화, 실제 ID는 DAO에서 설정
+        User newUser = new User(0, loginId, userName, wp);
         userDAO.insert(newUser);
     }
 
