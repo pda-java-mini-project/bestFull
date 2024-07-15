@@ -54,9 +54,9 @@ public class OrderView {
     }
 
     private void showDinamicOrderMenus(OrderMenu[] orderMenus, int totalCartSum) {
-        System.out.println("[메뉴번호]\t\t\t\t메뉴명\t\t\t\t개수\t\t\t\t총액(가격 * 개수)\");");
+        System.out.println("[메뉴번호]\t\t메뉴명\t\t개수\t\t총액(가격 * 개수)");
         for(OrderMenu orderMenu : orderMenus) {
-            System.out.println(String.format("[%s]\t\t\t\t%s\t\t\t\t%s\t\t\t\t%,d(%,d * %d)",
+            System.out.println(String.format("[%s]\t\t%s\t\t%s\t\t%,d(%,d * %d)",
                     orderMenu.getId(),
                     orderMenu.getName(),
                     orderMenu.getCount(),
