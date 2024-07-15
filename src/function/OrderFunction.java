@@ -54,10 +54,8 @@ public class OrderFunction {
         orderController.receiveOrderCompletedOption();
     }
 
-    public void orderList(String userId){
 
     }
-
 
     private boolean paymentService() {
         orderController.showPaymentView();
